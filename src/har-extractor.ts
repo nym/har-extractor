@@ -51,7 +51,11 @@ export const extract = (harContent: Har, options: ExtractOptions) => {
             console.log(outputPath);
         }
         if (!options.dryRun) {
-            fs.writeFileSync(outputPath, buffer);
+            try {
+                fs.writeFileSync(outputPath, buffer);
+            catch(e) {
+                console.log("there was a problem writing to this path: "+outputPath);
+            }
         }
     });
 };
